@@ -1,0 +1,1 @@
+Built a Mastermind game from the command line where the player have 12 turns to guess the secret code, starting with player guessing the computer’s random code.
