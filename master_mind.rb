@@ -34,13 +34,41 @@ class Computer
       end
     end  
 
-  # Select a random the "code-sequence"
-
   # Check player's guess and provide feedback
-
+  def check 
+    
+    @black_keys = 0
+    @white_keys = 0
     # A correct entry (in placement and color)
-
+    i = 0 
+    while i < computer_array.length do
+      if player_array[i] == computer_array[i]
+        @black_keys += 1 
+        player_array[i] = "A"
+        computer_array[i] = "B"
+      end
+      i += 1 
+    end
+    
     # A correct color-only
+    j = 0 
+    while j < computer_array.length do 
+    
+      k = 0 
+      while k < player_array.length do 
+        
+        if ( ( computer_array[j] == player_array[k] ) &&
+             ( j != k ) ) then 
+            
+          @white_keys += 1 
+          player_array[k] = "Z"
+          computer_array[j] = "Y"
+        end
+        k += 1
+      end
+    
+      j += 1
+    end
 
     # A cracked code
 end 
