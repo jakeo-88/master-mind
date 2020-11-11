@@ -9,7 +9,7 @@ module Variables
     @g = g # green
     @y = y # yellow
     @o = o # orange
-    @p = p # pink
+    @p = pk # pink
   end 
   
   def keys
@@ -26,12 +26,12 @@ class Computer
     def make_code
       code_pegs = [@r, @b, @g, @y, @o, @pk]
   
-      new_array = []
+      @new_array = []
       randomizer = Random.new
   
       i = 0
       while i < 6 do 
-        new_array.push(code_pegs[randomizer.rand(6)])     
+        @new_array.push(code_pegs[randomizer.rand(6)])     
         i += 1
       end
     end  
@@ -47,9 +47,39 @@ class Computer
     # A cracked code
 end 
 # Class for player
+class Player
+  include Variables     
     
-    # Guess "code-sequence"
+  # Guess "code-sequence"
+  def code_breaker
+    @code_guess = Array.new
+        
+    puts "Guess the Code. Select 6 the following: #{@r}, #{@b}, #{@g}, #{@y}, #{@o}, or #{@pk}"
+        
+    i = 0 
+    while i < 6 do
+      selection = gets.chomp
+          
+      until ( (selection == @r) ||
+              (selection == @b) ||
+              (selection == @g) ||
+              (selection == @y) ||
+              (selection == @o) ||
+              (selection == @pk) ) do
+        puts "That's not a valid choice, try again!"
+        selection = gets.chomp
+      end
+          
+      @code_guess.push(selection)
+      print @code_guess
+      puts " "
+          
+      i += 1                                          
+    end
+        
+  end
 
+end
 # Class for the running the game
 
   # Establish no. of games to play, must be an even no.
