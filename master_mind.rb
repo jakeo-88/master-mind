@@ -29,10 +29,10 @@ class Computer
       @new_array = []
       randomizer = Random.new
   
-      i = 0
-      while i < 6 do 
-        @new_array.push(code_pegs[randomizer.rand(6)])     
-        i += 1
+      @new_array = []
+      randomizer = Random.new
+      code_pegs.map do |value| 
+        @new_array.push(code_pegs[randomizer.rand(6)])
       end
     end  
 
