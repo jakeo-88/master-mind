@@ -1,5 +1,22 @@
 # Module with variables
-
+module Variables
+  
+  def colors
+    # 6 colors for code
+    @r = r # red
+    @b = b # blue
+    @g = g # green
+    @y = y # yellow
+    @o = o # orange
+    @p = p # pink
+  end 
+  
+  def keys
+    # Key pegs for computer feedback
+    @blk = blk #black
+    @w = w #white
+  end
+end 
 # Class for computer
 
   # Select a random the "code-sequence"
