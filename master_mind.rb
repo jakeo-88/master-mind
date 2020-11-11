@@ -2,17 +2,15 @@
 module Variables
   attr_reader :r, :b, :g, :y, :o, :pk
 
-    def colors(r, b, g, y, o, pk)
+    def initialize(r, b, g, y, o, pk)
     # 6 colors for code
     @r = r # red
     @b = b # blue
     @g = g # green
     @y = y # yellow
     @o = o # orange
-    @p = pk # pink
-  end 
+    @pk = pk # pink
   
-  def keys
     # Key pegs for computer feedback
     @blk = blk #black
     @w = w #white
