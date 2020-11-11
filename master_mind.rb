@@ -18,6 +18,22 @@ module Variables
   end
 end 
 # Class for computer
+class Computer
+    include Variables
+    
+    # Select a random the "code-sequence"
+    def make_code
+      code_pegs = [@r, @b, @g, @y, @o, @pk]
+  
+      newarray = []
+      randomizer = Random.new
+  
+      i = 0
+      while i < 6 do 
+        newarray.push(code_pegs[randomizer.rand(6)])     
+        i += 1
+      end
+    end  
 
   # Select a random the "code-sequence"
 
@@ -28,7 +44,7 @@ end
     # A correct color-only
 
     # A cracked code
-
+end 
 # Class for player
     
     # Guess "code-sequence"
