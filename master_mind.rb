@@ -1,7 +1,8 @@
 # Module with variables
 module Variables
-  
-  def colors
+  attr_reader :r, :b, :g, :y, :o, :pk
+
+    def colors(r, b, g, y, o, pk)
     # 6 colors for code
     @r = r # red
     @b = b # blue
@@ -25,12 +26,12 @@ class Computer
     def make_code
       code_pegs = [@r, @b, @g, @y, @o, @pk]
   
-      newarray = []
+      new_array = []
       randomizer = Random.new
   
       i = 0
       while i < 6 do 
-        newarray.push(code_pegs[randomizer.rand(6)])     
+        new_array.push(code_pegs[randomizer.rand(6)])     
         i += 1
       end
     end  
