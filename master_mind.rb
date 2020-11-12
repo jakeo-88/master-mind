@@ -121,13 +121,23 @@ class Computer < Player
   end
 end 
 # Class for the running the game
+  
 
+  # For each game
   # Establish no. of games to play, must be an even no.
+  puts "Let's play a game! \n" \
+       "Enter the number of rounds. \n" \
+       "Please choose an even number."
+  
+    @round_no = gets.chomp.to_i
 
-  #For each game
-
+    until ( (@round_no > 0) && (@round_no.even? == true) ) do
+      puts "Please select an even number." 
+      @round_no = gets.chomp.to_i
+    end
+    
     # Play each game
-    @round_no = 8
+    
       # 1. Computer makes "code"
       computer = Computer.new("r", "b", "g", "y", "o", 
                               "pk")
