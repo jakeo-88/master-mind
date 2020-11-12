@@ -1,6 +1,6 @@
 # Module with variables
 module Variables
-  attr_reader :r, :b, :g, :y, :o, :pk
+  attr_reader :r, :b, :g, :y, :o, :pk, :blk, :w
 
     def initialize(r, b, g, y, o, pk)
     # 6 colors for code
@@ -16,62 +16,7 @@ module Variables
     @w = w #white
   end
 end 
-# Class for computer
-class Computer
-    include Variables
-    
-    # Select a random the "code-sequence"
-    def make_code
-      code_pegs = [@r, @b, @g, @y, @o, @pk]
-  
-      @new_array = []
-      randomizer = Random.new
-  
-      @new_array = []
-      randomizer = Random.new
-      code_pegs.map do |value| 
-        @new_array.push(code_pegs[randomizer.rand(6)])
-      end
-    end  
 
-  # Check player's guess and provide feedback
-  def check 
-    
-    @black_keys = 0
-    @white_keys = 0
-    # A correct entry (in placement and color)
-    i = 0 
-    while i < computer_array.length do
-      if player_array[i] == computer_array[i]
-        @black_keys += 1 
-        player_array[i] = "A"
-        computer_array[i] = "B"
-      end
-      i += 1 
-    end
-    
-    # A correct color-only
-    j = 0 
-    while j < computer_array.length do 
-    
-      k = 0 
-      while k < player_array.length do 
-        
-        if ( ( computer_array[j] == player_array[k] ) &&
-             ( j != k ) ) then 
-            
-          @white_keys += 1 
-          player_array[k] = "Z"
-          computer_array[j] = "Y"
-        end
-        k += 1
-      end
-    
-      j += 1
-    end
-
-    # A cracked code
-end 
 # Class for player
 class Player
   include Variables     
@@ -80,7 +25,7 @@ class Player
   def code_breaker
     @code_guess = Array.new
         
-    puts "Guess the Code. Select 6 the following: #{@r}, #{@b}, #{@g}, #{@y}, #{@o}, or #{@pk}"
+    puts "Guess the Code. Select 6 the following: #{@r}, #{@b}, #{@g}, #{@y}, #{@o}, #{@pk}"
         
     i = 0 
     while i < 6 do
@@ -102,10 +47,76 @@ class Player
           
       i += 1                                          
     end
-        
+    @code_guess      
   end
 
 end
+
+# Class for computer
+class Computer < Player
+    include Variables
+    
+    attr_reader :computer_guess
+
+    # Select a random the "code-sequence"
+    def code_maker
+      @code_pegs = [@r, @b, @g, @y, @o, @pk]
+  
+      @computer_guess = Array.new
+      @randomizer = Random.new
+      
+      @code_pegs.map do |value| 
+        @computer_guess.push(@code_pegs[@randomizer.rand(@code_pegs.length)])
+      end
+      @computer_guess
+    end  
+
+  # Check player's guess and provide feedback
+  def check(player) 
+    
+    @code_breaker = player
+
+    @computer_array = @computer_guess
+
+    @blk = 0
+    @w = 0
+
+    # A correct entry (in placement and color)
+    i = 0 
+    while i < @computer_array.length do
+      if @code_breaker[i] == @computer_array[i]
+        @blk += 1 
+        @code_breaker[i] = "A"
+        @computer_array[i] = "B"
+      end
+      i += 1 
+    end
+    
+    # A correct color-only
+    j = 0 
+    while j < @computer_array.length do 
+    
+      k = 0 
+      while k < @code_breaker.length do 
+        
+        if ( ( @computer_array[j] == @code_breaker[k] ) &&
+             ( j != k ) ) then 
+            
+          @w += 1 
+          @code_breaker[k] = "Z"
+          @computer_array[j] = "Y"
+        end
+        k += 1
+      end
+    
+      j += 1
+    end
+  puts "Black Keys: #{@blk} \n" \
+       "White Keys: #{@w}"
+    # A cracked code
+
+  end
+end 
 # Class for the running the game
 
   # Establish no. of games to play, must be an even no.
