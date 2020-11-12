@@ -124,11 +124,20 @@ end
   #For each game
 
     # Play each game
-    
+    @round_no = 8
       # 1. Computer makes "code"
-      
+      computer = Computer.new("r", "b", "g", "y", "o", 
+                              "pk")
       # 2. Player guesses
-
+      player = Player.new("r", "b", "g", "y", "o", 
+                              "pk")
+      l = 0
+      while l < 8 do
+          p computer.computer_guess
+          computer.check(player.code_breaker)
+          break if computer.blk == 6
+          l += 1
+      end
       # 3. Computer provides feed-back
 
       # 4. Repeat steps 2 and 3 until game is over
