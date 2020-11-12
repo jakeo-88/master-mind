@@ -111,10 +111,10 @@ class Computer < Player
     
       j += 1
     end
-  puts "Black Keys: #{@blk} \n" \
+    puts "Black Keys: #{@blk} \n" \
        "White Keys: #{@w}"
     # A cracked code
-
+    puts "Congrats! You cracked the code!" if @blk == @computer_array.length
   end
 end 
 # Class for the running the game
