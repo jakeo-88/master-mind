@@ -69,14 +69,17 @@ class Computer < Player
         @computer_guess.push(@code_pegs[@randomizer.rand(@code_pegs.length)])
       end
       @computer_guess
+
     end  
 
   # Check player's guess and provide feedback
-  def check(player) 
+  def check(player, computer) 
     
     @code_breaker = player
 
-    @computer_array = @computer_guess
+    @computer_array = Array.new
+
+    computer.map { |i| @computer_array.push(i) }
 
     @blk = 0
     @w = 0
@@ -128,6 +131,7 @@ end
       # 1. Computer makes "code"
       computer = Computer.new("r", "b", "g", "y", "o", 
                               "pk")
+      computer.code_maker                              
       # 2. Player guesses
       player = Player.new("r", "b", "g", "y", "o", 
                               "pk")
