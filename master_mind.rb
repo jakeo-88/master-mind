@@ -123,25 +123,10 @@ class Computer < Player
   end
 end 
 # Class for the running the game
-class MasterMind  
+class Game  
 
-  def play_games  
-
-  # For each sessons
-  # Establish no. of games to play, must be an even no.
-  puts "Let's play Master Mind! \n" \
-       "Enter the number of games. \n" \
-       "Please choose an even number."
-  
-    @round_no = gets.chomp.to_i
-
-    until ( (@round_no > 0) && (@round_no.even? == true) ) do
-      puts "Please select an even number." 
-      @round_no = gets.chomp.to_i
-    end
-
+  def each_game  
     # Play each game
-    
       # 1. Computer makes "code"
       computer = Computer.new("r", "b", "g", "y", "o", 
                               "pk")
@@ -164,6 +149,30 @@ class MasterMind
   end
 end
 
+class MasterMind < Game 
+  def play_games  
+  # For each sessons
+  # Establish no. of games to play, must be an even no.
+    puts "Let's play Master Mind! \n" \
+         "Enter the number of games. \n" \
+         "Please choose an even number."
+  
+    @game_no = gets.chomp.to_i
+
+    until ( (@game_no > 0) && (@game_no.even? == true) ) do
+      puts "Please select an even number." 
+      @game_no = gets.chomp.to_i
+    end
+
+    n = 0
+    while n < @game_no do
+      puts "New game!"
+      game = Game.new
+      game.each_game
+      n += 1
+    end
+  end
+end
 
 
         
