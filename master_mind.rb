@@ -22,10 +22,10 @@ class Player
   include Variables     
     
   # Guess "code-sequence"
-  def code_breaker
+  def player_code
     @code_guess = Array.new
         
-    puts "Guess the Code. Select 6 the following: #{@r}, #{@b}, #{@g}, #{@y}, #{@o}, #{@pk}"
+    puts "Guess the Code. Select 4 from the following: #{@r}, #{@b}, #{@g}, #{@y}, #{@o}, #{@pk}"
         
     i = 0 
     while i < 4 do
@@ -71,9 +71,13 @@ class Computer < Player
         m += 1
       end
       @computer_guess
-
     end  
 
+    def code_breaker
+    end
+end 
+# Class for the running the game
+class Game < Computer  
   # Check player's guess and provide feedback
   def check(player, computer) 
     
@@ -121,9 +125,6 @@ class Computer < Player
     # A cracked code
     puts "Congrats! You cracked the code!" if @blk == @computer_array.length
   end
-end 
-# Class for the running the game
-class Game  
 
   def player_guessing  
     # Play each game
@@ -137,16 +138,16 @@ class Game
       l = 0
       while l < 12 do
           p computer.computer_guess
-          computer.check(player.code_breaker, computer.computer_guess)
-          break if computer.blk == 4
+          self.check(player.player_breaker, computer.computer_guess)
+          break if self.blk == 4
           l += 1
       end
       # 3. Computer provides feed-back
       # 4. Repeat steps 2 and 3 until game is over
     # Ending each game
     puts "That's game!"
-
   end
+
   def computer_guessing  
     # Play each game
       # 1. Player makes "code"
@@ -165,7 +166,9 @@ class Game
   end
 end
 
-class MasterMind < Game 
+class MasterMind
+  include Variables
+  
   def play_games  
   # For each sessons
   # Establish no. of games to play, must be an even no.
@@ -200,7 +203,7 @@ class MasterMind < Game
       elsif player_select == "computer"
         game.computer_guessing
       end
-      
+
       n += 1
     end
   end
