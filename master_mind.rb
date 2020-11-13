@@ -153,7 +153,8 @@ class Game < Computer
       # 1. Player makes "code"
       player = Player.new("r", "b", "g", "y", "o", 
                               "pk")
-
+      player.player_code
+      
       # 2. Computer guesses
       computer = Computer.new("r", "b", "g", "y", "o", 
                               "pk")
