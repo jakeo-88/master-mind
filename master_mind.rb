@@ -28,7 +28,7 @@ class Player
     puts "Guess the Code. Select 6 the following: #{@r}, #{@b}, #{@g}, #{@y}, #{@o}, #{@pk}"
         
     i = 0 
-    while i < 6 do
+    while i < 4 do
       selection = gets.chomp
           
       until ( (selection == @r) ||
@@ -66,7 +66,7 @@ class Computer < Player
       @randomizer = Random.new
       
       @code_pegs.map do |value| 
-        @computer_guess.push(@code_pegs[@randomizer.rand(@code_pegs.length)])
+        @computer_guess.push(@code_pegs[@randomizer.rand(4)])
       end
       @computer_guess
 
@@ -121,12 +121,14 @@ class Computer < Player
   end
 end 
 # Class for the running the game
-  
+class MasterMind  
 
-  # For each game
+  def play_games  
+
+  # For each sessons
   # Establish no. of games to play, must be an even no.
-  puts "Let's play a game! \n" \
-       "Enter the number of rounds. \n" \
+  puts "Let's play Master Mind! \n" \
+       "Enter the number of games. \n" \
        "Please choose an even number."
   
     @round_no = gets.chomp.to_i
@@ -135,7 +137,7 @@ end
       puts "Please select an even number." 
       @round_no = gets.chomp.to_i
     end
-    
+
     # Play each game
     
       # 1. Computer makes "code"
@@ -146,27 +148,20 @@ end
       player = Player.new("r", "b", "g", "y", "o", 
                               "pk")
       l = 0
-      while l < 8 do
+      while l < 12 do
           p computer.computer_guess
           computer.check(player.code_breaker)
-          break if computer.blk == 6
+          break if computer.blk == 4
           l += 1
       end
       # 3. Computer provides feed-back
-
       # 4. Repeat steps 2 and 3 until game is over
-
     # Ending each game
+    puts "That's game!"
 
-        # When computer declares code is cracked
-    
-        # When there are no more guesses
+  end
+end
 
-        # Check if there are more games
-
-          # If there are more games to play, start another one
-
-          # If all games are played, end the session
 
 
         
