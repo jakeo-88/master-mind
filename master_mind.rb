@@ -65,8 +65,10 @@ class Computer < Player
       @computer_guess = Array.new
       @randomizer = Random.new
       
-      @code_pegs.map do |value| 
+      m = 0
+      while m < 4 do 
         @computer_guess.push(@code_pegs[@randomizer.rand(4)])
+        m += 1
       end
       @computer_guess
 
