@@ -25,7 +25,7 @@ class Player
   def player_code
     @code_guess = Array.new
         
-    puts "Guess the Code. Select 4 from the following: #{@r}, #{@b}, #{@g}, #{@y}, #{@o}, #{@pk}"
+    puts "Select your Code. Select 4 from the following: #{@r}, #{@b}, #{@g}, #{@y}, #{@o}, #{@pk}"
         
     i = 0 
     while i < 4 do
@@ -53,7 +53,7 @@ class Player
 end
 
 # Class for computer
-class Computer < Player
+class Computer
     include Variables
     
     attr_reader :computer_guess
@@ -138,7 +138,7 @@ class Game < Computer
       l = 0
       while l < 12 do
           p computer.computer_guess
-          self.check(player.player_breaker, computer.computer_guess)
+          self.check(player.player_code, computer.computer_guess)
           break if self.blk == 4
           l += 1
       end
@@ -154,7 +154,7 @@ class Game < Computer
       player = Player.new("r", "b", "g", "y", "o", 
                               "pk")
       player.player_code
-      
+
       # 2. Computer guesses
       computer = Computer.new("r", "b", "g", "y", "o", 
                               "pk")
@@ -187,7 +187,8 @@ class MasterMind
     n = 0
     while n < @game_no do
       puts "New game!"
-      game = Game.new
+      game = Game.new("r", "b", "g", "y", "o", 
+      "pk")
 
       puts "Who is the code-maker? \n"
            "Select: computer or player"
@@ -199,10 +200,10 @@ class MasterMind
       end
       
       if player_select == "player"
-        game.player_guessing
+        game.computer_guessing
       
       elsif player_select == "computer"
-        game.computer_guessing
+        game.player_guessing
       end
 
       n += 1
