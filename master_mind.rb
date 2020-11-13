@@ -25,7 +25,7 @@ class Player
   def player_code
     @code_guess = Array.new
         
-    puts "Select your Code. Select 4 from the following: #{@r}, #{@b}, #{@g}, #{@y}, #{@o}, #{@pk}"
+    puts "Select your Code. Select 4 from the following, by entering each character individually: #{@r}, #{@b}, #{@g}, #{@y}, #{@o}, #{@pk}"
         
     i = 0 
     while i < 4 do
@@ -56,7 +56,7 @@ end
 class Computer
     include Variables
     
-    attr_reader :computer_guess
+    attr_reader :computer_guess, :com_guess
 
     # Select a random the "code-sequence"
     def code_maker
@@ -74,6 +74,8 @@ class Computer
     end  
 
     def code_breaker
+      @com_guess = Array.new(4)
+      @com_guess.map {|i| i = @code_pegs }
     end
 end 
 # Class for the running the game
@@ -158,7 +160,7 @@ class Game < Computer
       # 2. Computer guesses
       computer = Computer.new("r", "b", "g", "y", "o", 
                               "pk")
-
+      computer.code_breaker
       # 3. Computer provides feed-back
       # 4. Repeat steps 2 and 3 until game is over
     # Ending each game
@@ -190,7 +192,7 @@ class MasterMind
       game = Game.new("r", "b", "g", "y", "o", 
       "pk")
 
-      puts "Who is the code-maker? \n"
+      puts "Who is the code-maker? \n" \
            "Select: computer or player"
       player_select = gets.chomp
       until player_select == "player" || player_select == "computer" do
