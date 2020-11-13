@@ -125,7 +125,7 @@ end
 # Class for the running the game
 class Game  
 
-  def each_game  
+  def player_guessing  
     # Play each game
       # 1. Computer makes "code"
       computer = Computer.new("r", "b", "g", "y", "o", 
@@ -141,6 +141,22 @@ class Game
           break if computer.blk == 4
           l += 1
       end
+      # 3. Computer provides feed-back
+      # 4. Repeat steps 2 and 3 until game is over
+    # Ending each game
+    puts "That's game!"
+
+  end
+  def computer_guessing  
+    # Play each game
+      # 1. Player makes "code"
+      player = Player.new("r", "b", "g", "y", "o", 
+                              "pk")
+
+      # 2. Computer guesses
+      computer = Computer.new("r", "b", "g", "y", "o", 
+                              "pk")
+
       # 3. Computer provides feed-back
       # 4. Repeat steps 2 and 3 until game is over
     # Ending each game
@@ -168,7 +184,23 @@ class MasterMind < Game
     while n < @game_no do
       puts "New game!"
       game = Game.new
-      game.each_game
+
+      puts "Who is the code-maker? \n"
+           "Select: computer or player"
+      player_select = gets.chomp
+      until player_select == "player" || player_select == "computer" do
+        puts "That's not an option. \n" \
+             "Select: computer or player"
+        player_select == gets.chomp
+      end
+      
+      if player_select == "player"
+        game.player_guessing
+      
+      elsif player_select == "computer"
+        game.computer_guessing
+      end
+      
       n += 1
     end
   end
