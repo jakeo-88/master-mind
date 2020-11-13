@@ -137,7 +137,7 @@ class Game
       l = 0
       while l < 12 do
           p computer.computer_guess
-          computer.check(player.code_breaker)
+          computer.check(player.code_breaker, computer.computer_guess)
           break if computer.blk == 4
           l += 1
       end
