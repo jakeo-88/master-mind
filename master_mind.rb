@@ -1,6 +1,6 @@
 # Module with variables
 module Variables
-  attr_reader :r, :b, :g, :y, :o, :pk, :blk, :w
+  attr_reader :r, :b, :g, :y, :o, :pk, :blk, :w, :code_pegs
 
     def initialize(r, b, g, y, o, pk)
     # 6 colors for code
@@ -14,6 +14,9 @@ module Variables
     # Key pegs for computer feedback
     @blk = blk #black
     @w = w #white
+
+    # An array of code-pegs
+    @code_pegs = [@r, @b, @g, @y, @o, @pk]
   end
 end 
 
@@ -60,8 +63,6 @@ class Computer
 
     # Select a random the "code-sequence"
     def code_maker
-      @code_pegs = [@r, @b, @g, @y, @o, @pk]
-  
       @computer_guess = Array.new
       @randomizer = Random.new
       
@@ -75,7 +76,7 @@ class Computer
 
     def code_breaker
       @com_guess = Array.new(4)
-      @com_guess.map {|i| i = @code_pegs }
+      @com_guess.map {|i| i = @code_pegs[0] }
     end
 end 
 # Class for the running the game
