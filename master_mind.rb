@@ -52,7 +52,6 @@ class Player
     end
     @code_guess      
   end
-
 end
 
 # Class for computer
@@ -74,13 +73,22 @@ class Computer
       @computer_guess
     end  
 
-    def code_breaker
+    def code_breaker(cb_options)
       @com_guess = Array.new(4)
-      @com_guess.map {|i| i = @code_pegs[0] }
+      i = 0
+      while i < 4 do
+          @com_guess[i] = cb_options[-1]
+          i += 1
+      end
+      @com_guess
     end
 end 
 # Class for the running the game
-class Game < Computer  
+class Game 
+  include Variables  
+  
+  attr_accessor :cb_options, :com_guess
+
   # Check player's guess and provide feedback
   def check(player, computer) 
     
@@ -156,12 +164,41 @@ class Game < Computer
       # 1. Player makes "code"
       player = Player.new("r", "b", "g", "y", "o", 
                               "pk")
-      player.player_code
+      # player.player_code
+      test_player = ["r", "r" , "r", "r"]
 
       # 2. Computer guesses
       computer = Computer.new("r", "b", "g", "y", "o", 
                               "pk")
-      computer.code_breaker
+      
+        @cb_options = Array[6]
+        
+        a = 0
+        while a < 6 do
+          @cb_options[a] = @code_pegs[a]
+          a += 1
+        end
+        
+        i = 0
+        while i < 12 do 
+          self.check(computer.code_breaker(@cb_options), test_player)
+          @cb_options.pop()
+          if self.blk == 4
+           break  
+          else
+              j = 0
+              while j < 4 do
+                  if computer.com_guess[j] == test_player[j]
+                      # do nothing
+                  elsif computer.com_guess[j] == test_player[j]
+                      computer.com_guess[j] = @cb_options[-1]
+                  end
+                  j += 1
+              end
+          end
+          p computer.com_guess    
+          i += 1
+        end                        
       # 3. Computer provides feed-back
       # 4. Repeat steps 2 and 3 until game is over
     # Ending each game
