@@ -23,7 +23,9 @@ end
 # Class for player
 class Player
   include Variables     
-    
+  
+  attr_accessor :code_guess
+
   # Guess "code-sequence"
   def player_code
     @code_guess = Array.new
@@ -148,7 +150,7 @@ class Game
                               "pk")
       l = 0
       while l < 12 do
-          p computer.computer_guess
+          computer.computer_guess
           self.check(player.player_code, computer.computer_guess)
           break if self.blk == 4
           l += 1
@@ -165,38 +167,50 @@ class Game
       player = Player.new("r", "b", "g", "y", "o", 
                               "pk")
       # player.player_code
-      test_player = ["r", "r" , "r", "r"]
+      player.player_code
 
       # 2. Computer guesses
       computer = Computer.new("r", "b", "g", "y", "o", 
                               "pk")
       
-        @cb_options = Array[6]
+        @cb_options = Array(6)
         
-        a = 0
-        while a < 6 do
-          @cb_options[a] = @code_pegs[a]
-          a += 1
+        l = 0
+        while l < 6 do
+          @cb_options[l] = @code_pegs[l]
+          l += 1
         end
         
+        computer.code_breaker(@cb_options)
+
         i = 0
         while i < 12 do 
-          self.check(computer.code_breaker(@cb_options), test_player)
+          p computer.com_guess
+          
+          play_arr = Array.new
+          com_arr = Array.new
+      
+          computer.com_guess.map {|i| com_arr.push(i) }
+          player.code_guess.map {|i| play_arr.push(i) }
+
+          self.check(com_arr, play_arr)
           @cb_options.pop()
           if self.blk == 4
            break  
           else
               j = 0
               while j < 4 do
-                  if computer.com_guess[j] == test_player[j]
+                  if computer.com_guess[j] == player.code_guess[j]
                       # do nothing
-                  elsif computer.com_guess[j] == test_player[j]
+                  elsif computer.com_guess[j] != player.code_guess[j]
                       computer.com_guess[j] = @cb_options[-1]
                   end
                   j += 1
               end
+              computer.com_guess
           end
-          p computer.com_guess    
+          computer.com_guess 
+          @cb_options   
           i += 1
         end                        
       # 3. Computer provides feed-back
@@ -208,7 +222,6 @@ class Game
 end
 
 class MasterMind
-  include Variables
   
   def play_games  
   # For each sessons
@@ -236,7 +249,7 @@ class MasterMind
       until player_select == "player" || player_select == "computer" do
         puts "That's not an option. \n" \
              "Select: computer or player"
-        player_select == gets.chomp
+        player_select = gets.chomp
       end
       
       if player_select == "player"
